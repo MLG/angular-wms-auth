@@ -1,13 +1,13 @@
 {
   "name": "MLG-WMS-Auth",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/MLG/angular-wms-auth",
   "authors": [
     "Eugene OZ <normandiggs@gmail.com>"
   ],
   "main": "service.js",
   "license": "no",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
