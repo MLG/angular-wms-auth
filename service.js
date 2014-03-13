@@ -9,7 +9,13 @@ angular.module('mlgWmsAuth', [])
             if (!angular.isUndefined(response.session_user_name)) {
               Model.session = {user_name: response.session_user_name};
               Model.is_authenticated = true;
-              Model.employee_id = response.employee_id
+              Model.employee_id = response.employee_id;
+              if (response.first_name) {
+                Model.first_name = response.first_name;
+              }
+              if (response.last_name) {
+                Model.last_name = response.last_name;
+              }
             }
           })
           .error(function (data, status, headers) {
@@ -27,7 +33,7 @@ angular.module('mlgWmsAuth', [])
   .directive('wmsAuthRequest', function () {
     return {
       restrict: 'AEC',
-      scope:{
+      scope: {
         authPath: '@',
         initPath: '@'
       },
