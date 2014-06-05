@@ -3,19 +3,13 @@
 angular.module('mlgWmsAuth', [])
   .service('Auth', function Auth($http) {
     var Model = {
-      authenticate: function (init_path, auth_path) {
+      authenticate:     function (init_path, auth_path) {
         $http.get(init_path)
           .success(function (response) {
             if (!angular.isUndefined(response.session_user_name)) {
+              angular.extend(Model, response);
               Model.session = {user_name: response.session_user_name};
               Model.is_authenticated = true;
-              Model.employee_id = response.employee_id;
-              if (response.first_name) {
-                Model.first_name = response.first_name;
-              }
-              if (response.last_name) {
-                Model.last_name = response.last_name;
-              }
             }
           })
           .error(function (data, status, headers) {
@@ -24,16 +18,16 @@ angular.module('mlgWmsAuth', [])
             }
           });
       },
-      session: {},
-      employee_id: null,
+      session:          {},
+      employee_id:      null,
       is_authenticated: false
     };
     return Model;
   })
   .directive('wmsAuthRequest', function () {
     return {
-      restrict: 'AEC',
-      scope: {
+      restrict:   'AEC',
+      scope:      {
         authPath: '@',
         initPath: '@'
       },
